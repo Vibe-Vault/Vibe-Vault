@@ -1,4 +1,10 @@
 {
+  "quiet-acre": {
+    "up": 0,
+    "heart": 0,
+    "eyes": 0,
+    "comments": 0
+  },
   "night-shift-3d": {
     "up": 0,
     "heart": 0,
@@ -15,6 +21,6 @@
     "up": 0,
     "heart": 0,
     "eyes": 0,
-    "comments": 0
+    "comments": 1
   }
 }
