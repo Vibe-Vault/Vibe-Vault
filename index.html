@@ -148,7 +148,7 @@
                     ? ` &bull; <span style="color:#66fcf1">${R.up ? "👍" + R.up + " " : ""}${R.heart ? "❤️" + R.heart + " " : ""}${R.eyes ? "👀" + R.eyes + " " : ""}${R.comments ? "💬" + R.comments : ""}</span>` : "";
                 const paid = g.full_version_url ? ` &bull; <span class="paid">demo — full version available</span>` : "";
                 const ext = g.full_version_url ? `<a class="ext-btn" href="${g.full_version_url}">Full version ↗</a>` : "";
-                const disc = g.discuss_url ? `<a class="ext-btn" href="${g.discuss_url}">💬 Rate</a>` : "";
+                const disc = g.discuss_url ? `<a class="ext-btn" href="rate.html?id=${g.id}">💬 Rate</a>` : "";
                 card.innerHTML = `
                     <div class="card-content">
                         <h2>${g.title}</h2>
