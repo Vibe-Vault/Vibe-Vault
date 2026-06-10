@@ -1,5 +1,13 @@
 [
   {
+    "id": "quiet-acre",
+    "title": "Quiet Acre",
+    "vibe": "a small garden that asks very little — plant, merge, and grow toward the Great Tree",
+    "tags": ["cozy-ambient", "incremental", "mobile"],
+    "built_with": "Claude (Fable 5)",
+    "discuss_url": "https://github.com/Vibe-Vault/Vibe-Vault/discussions/8"
+  },
+  {
     "id": "night-shift-3d",
     "title": "Night Shift 3D",
     "vibe": "the same hotel, now you're inside it — first-person corridors at 3am",
