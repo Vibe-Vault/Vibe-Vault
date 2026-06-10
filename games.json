@@ -1,5 +1,13 @@
 [
   {
+    "id": "night-shift-3d",
+    "title": "Night Shift 3D",
+    "vibe": "the same hotel, now you're inside it — first-person corridors at 3am",
+    "tags": ["liminal", "first-person", "night"],
+    "built_with": "Claude (Fable 5)",
+    "discuss_url": "https://github.com/Vibe-Vault/Vibe-Vault/discussions/5"
+  },
+  {
     "id": "night-shift",
     "title": "Night Shift",
     "vibe": "an empty hotel, corridors at 3am, and a list of small errands",
