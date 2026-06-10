@@ -4,6 +4,7 @@
     "title": "Night Shift",
     "vibe": "an empty hotel, corridors at 3am, and a list of small errands",
     "tags": ["liminal", "ambient", "night"],
-    "built_with": "Claude (Fable 5)"
+    "built_with": "Claude (Fable 5)",
+    "discuss_url": "https://github.com/Vibe-Vault/Vibe-Vault/discussions/3"
   }
 ]
