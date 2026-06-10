@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vibe Vault | Atmospheric Indie Archive</title>
+    <style>
+        /* Modern CSS Reset & Sleek Dark Palette */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            background-color: #0b0c10; 
+            color: #c5c6c7; 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        /* Layout Container */
+        .container { max-width: 1100px; margin: 0 auto; }
+
+        /* Minimal Header Zone */
+        header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            border-bottom: 1px solid #1f2833;
+            padding-bottom: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        .brand h1 { font-size: 1.8rem; color: #66fcf1; letter-spacing: -0.5px; }
+        .brand p { font-size: 0.9rem; color: #45f3ff; font-style: italic; opacity: 0.8; }
+        
+        /* Navigation Filters */
+        nav a { color: #c5c6c7; text-decoration: none; margin-left: 1.5rem; font-size: 0.95rem; transition: color 0.2s; }
+        nav a:hover, nav a.active { color: #66fcf1; }
+
+        /* The 3-Column Game Review Grid */
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 2rem; 
+        }
+
+        /* Individual Game Card Layout */
+        .card { 
+            background: #1f2833; 
+            border-radius: 8px; 
+            overflow: hidden; 
+            border: 1px solid #1f2833;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        .card:hover { transform: translateY(-4px); border-color: #66fcf1; }
+        
+        /* Image / Looping Gameplay GIF Box */
+        .card-visual { width: 100%; height: 180px; background: #0b0c10; overflow: hidden; }
+        .card-visual img { width: 100%; height: 100%; object-fit: cover; opacity: 0.9; }
+
+        /* Review Content */
+        .card-content { padding: 1.5rem; }
+        .card-content h2 { font-size: 1.3rem; color: #ffffff; margin-bottom: 0.5rem; }
+        
+        /* Aesthetic Hashtags */
+        .vibe-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
+        .tag { font-size: 0.75rem; background: #0b0c10; color: #66fcf1; padding: 0.2rem 0.6rem; border-radius: 4px; text-transform: lowercase; }
+
+        .critique { font-size: 0.9rem; color: #c5c6c7; }
+
+        /* Footer */
+        footer { text-align: center; margin-top: 5rem; padding-top: 2rem; border-top: 1px solid #1f2833; font-size: 0.8rem; color: #45faf4; opacity: 0.5; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <div class="brand">
+                <h1>🌌 Vibe Vault</h1>
+                <p>An archive for atmospheric and micro-indie experiences.</p>
+            </div>
+            <nav>
+                <a href="#" class="active">All</a>
+                <a href="#">#Liminal</a>
+                <a href="#">#Neon-Noir</a>
+                <a href="#">#Ambient</a>
+            </nav>
+        </header>
+
+        <main class="grid">
+
+            <article class="card">
+                <div class="card-visual">
+                    <img src="assets/images/placeholder.jpg" alt="Game Title">
+                </div>
+                <div class="card-content">
+                    <h2>Sample Game Title</h2>
+                    <div class="vibe-tags">
+                        <span class="tag">#liminal</span>
+                        <span class="tag">#dreampunk</span>
+                        <span class="tag">#vignette</span>
+                    </div>
+                    <p class="critique">
+                        This is your core structural component for reviews. Write a tight, impactful 150-word focus detailing how the game behaves spatially, its architectural mood, and how its soundscape defines the physical environment.
+                    </p>
+                </div>
+            </article>
+
+            <article class="card">
+                <div class="card-visual">
+                    <img src="assets/images/placeholder.jpg" alt="Game Title">
+                </div>
+                <div class="card-content">
+                    <h2>Another Indie Gem</h2>
+                    <div class="vibe-tags">
+                        <span class="tag">#neon-noir</span>
+                        <span class="tag">#ambient</span>
+                    </div>
+                    <p class="critique">
+                        Duplicate this entire block whenever you want to introduce a fresh micro-experience to the front-facing grid. It automatically aligns and remains fully mobile-responsive.
+                    </p>
+                </div>
+            </article>
+
+        </main>
+
+        <footer>
+            <p>&copy; 2026 Vibe Vault &bull; Open Source Under MIT License</p>
+        </footer>
+    </div>
+
+</body>
+</html>
