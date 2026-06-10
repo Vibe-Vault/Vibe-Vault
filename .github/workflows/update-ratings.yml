@@ -1,0 +1,63 @@
+name: Update game ratings
+
+on:
+  schedule:
+    - cron: "23 */6 * * *"   # every 6 hours
+  workflow_dispatch:          # manual run from the Actions tab
+
+permissions:
+  contents: write
+  discussions: read
+
+jobs:
+  ratings:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch discussion reactions
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api graphql -f query='
+            query {
+              repository(owner: "Vibe-Vault", name: "Vibe-Vault") {
+                discussions(first: 100) {
+                  nodes {
+                    number
+                    reactionGroups { content reactors { totalCount } }
+                    comments { totalCount }
+                  }
+                }
+              }
+            }' > /tmp/discussions.json
+
+      - name: Build ratings.json
+        run: |
+          python3 - <<'EOF'
+          import json, re
+          games = json.load(open("games.json"))
+          data = json.load(open("/tmp/discussions.json"))
+          nodes = {n["number"]: n for n in data["data"]["repository"]["discussions"]["nodes"]}
+          WANT = {"THUMBS_UP": "up", "HEART": "heart", "EYES": "eyes"}
+          out = {}
+          for g in games:
+              m = re.search(r"/discussions/(\d+)", g.get("discuss_url", "") or "")
+              if not m: continue
+              n = nodes.get(int(m.group(1)))
+              if not n: continue
+              r = {"up": 0, "heart": 0, "eyes": 0, "comments": n["comments"]["totalCount"]}
+              for grp in n["reactionGroups"]:
+                  if grp["content"] in WANT:
+                      r[WANT[grp["content"]]] = grp["reactors"]["totalCount"]
+              out[g["id"]] = r
+          json.dump(out, open("ratings.json", "w"), indent=2)
+          print(json.dumps(out, indent=2))
+          EOF
+
+      - name: Commit if changed
+        run: |
+          git config user.name "vibe-vault"
+          git config user.email "vibe-vault@users.noreply.github.com"
+          git add ratings.json
+          git diff --cached --quiet && echo "No rating changes." || (git commit -m "Update ratings [bot]" && git push)

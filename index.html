@@ -119,10 +119,13 @@
     (async function () {
         const grid = document.getElementById("grid");
         const filtersNav = document.getElementById("filters");
-        let games = [];
+        let games = [], ratings = {};
         try {
             games = await (await fetch("games.json")).json();
         } catch (e) { /* fall through to empty state */ }
+        try {
+            ratings = await (await fetch("ratings.json")).json();
+        } catch (e) { /* ratings are optional */ }
 
         function render(filter) {
             grid.innerHTML = "";
@@ -140,6 +143,9 @@
                 card.className = "card";
                 const tags = (g.tags || []).map(t => `<span class="tag">#${t}</span>`).join("");
                 const built = g.built_with ? `built with ${g.built_with}` : "";
+                const R = ratings[g.id];
+                const rate = R && (R.up + R.heart + R.eyes + R.comments) > 0
+                    ? ` &bull; <span style="color:#66fcf1">${R.up ? "👍" + R.up + " " : ""}${R.heart ? "❤️" + R.heart + " " : ""}${R.eyes ? "👀" + R.eyes + " " : ""}${R.comments ? "💬" + R.comments : ""}</span>` : "";
                 const paid = g.full_version_url ? ` &bull; <span class="paid">demo — full version available</span>` : "";
                 const ext = g.full_version_url ? `<a class="ext-btn" href="${g.full_version_url}">Full version ↗</a>` : "";
                 const disc = g.discuss_url ? `<a class="ext-btn" href="${g.discuss_url}">💬 Rate</a>` : "";
@@ -148,7 +154,7 @@
                         <h2>${g.title}</h2>
                         <p class="vibe-line">${g.vibe || ""}</p>
                         <div class="vibe-tags">${tags}</div>
-                        <p class="meta">${built}${paid}</p>
+                        <p class="meta">${built}${rate}${paid}</p>
                         <div class="actions">
                             <a class="play-btn" href="games/${g.id}/">▶ Play</a>
                             ${ext}${disc}
