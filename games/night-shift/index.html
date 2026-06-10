@@ -123,7 +123,7 @@ let task = null;                       // active request
 const queue = [];                      // pending requests
 const log = [];                        // night book lines
 let phone = { ringing: false, until: 0 };
-let liftTimer = 50 + Math.random() * 80;
+let liftTimer = 50 + Math.random() * 80, ringT = 0;
 let tvSeen = false, flickSeen = false, flick = 1;
 
 const REQUESTS = [
@@ -227,7 +227,11 @@ function tickWorld(dt) {
     phone["f" + i] = true; phone.ringing = true; phone.until = gameMin + 60;
     toast("Somewhere behind you, the front desk phone starts to ring.");
   }
-  if (phone.ringing) { if (Math.floor(gameMin * 2) % 2 === 0) ringPhone(); if (gameMin > phone.until) { phone.ringing = false; note("The phone stops before you reach it. The silence afterwards is louder."); } }
+  if (phone.ringing) {
+    ringT -= dt;
+    if (ringT <= 0) { ringPhone(); ringT = 2.6; }
+    if (gameMin > phone.until) { phone.ringing = false; note("The phone stops before you reach it. The silence afterwards is louder."); }
+  } else ringT = 0;
   liftTimer -= dt;
   if (liftTimer <= 0) { liftTimer = 120 + Math.random() * 140; dingLift(); if (Math.hypot(33 * TILE - P.x, 22 * TILE - P.y) < 9 * TILE) toast("The lift dings. The doors do not open."); }
   if (!tvSeen && gameMin > 4 * 60 + 1440) { const d = doorByNum[113]; if (d && nearDoor(d, 2.2)) { tvSeen = true; note("Television light pulses under the door of 113. A voice laughs at the wrong moment."); } }
