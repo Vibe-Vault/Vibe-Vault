@@ -3,129 +3,172 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vibe Vault | Atmospheric Indie Archive</title>
+    <meta name="description" content="Vibe Vault — a community home for games people made with Claude and other AI. Play in your browser, share yours, rate the rest.">
+    <title>Vibe Vault | Games made with AI, playable in your browser</title>
     <style>
-        /* Modern CSS Reset & Sleek Dark Palette */
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { 
-            background-color: #0b0c10; 
-            color: #c5c6c7; 
+        body {
+            background-color: #0b0c10;
+            color: #c5c6c7;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             line-height: 1.6;
             padding: 2rem 1rem;
         }
-
-        /* Layout Container */
         .container { max-width: 1100px; margin: 0 auto; }
-
-        /* Minimal Header Zone */
-        header { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
             border-bottom: 1px solid #1f2833;
             padding-bottom: 1.5rem;
-            margin-bottom: 3rem;
+            margin-bottom: 1.5rem;
         }
         .brand h1 { font-size: 1.8rem; color: #66fcf1; letter-spacing: -0.5px; }
         .brand p { font-size: 0.9rem; color: #45f3ff; font-style: italic; opacity: 0.8; }
-        
-        /* Navigation Filters */
-        nav a { color: #c5c6c7; text-decoration: none; margin-left: 1.5rem; font-size: 0.95rem; transition: color 0.2s; }
-        nav a:hover, nav a.active { color: #66fcf1; }
-
-        /* The 3-Column Game Review Grid */
-        .grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-            gap: 2rem; 
+        .submit-btn {
+            background: #66fcf1; color: #0b0c10; font-weight: 600;
+            padding: 0.55rem 1.1rem; border-radius: 6px; text-decoration: none;
+            font-size: 0.95rem; transition: opacity 0.2s;
         }
-
-        /* Individual Game Card Layout */
-        .card { 
-            background: #1f2833; 
-            border-radius: 8px; 
-            overflow: hidden; 
+        .submit-btn:hover { opacity: 0.85; }
+        .intro { margin-bottom: 2.5rem; font-size: 1rem; color: #9fa6ad; max-width: 720px; }
+        .intro strong { color: #ffffff; }
+        nav.filters { margin-bottom: 2rem; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+        nav.filters button {
+            background: #1f2833; color: #c5c6c7; border: 1px solid #1f2833;
+            padding: 0.3rem 0.9rem; border-radius: 999px; font-size: 0.85rem;
+            cursor: pointer; transition: color 0.2s, border-color 0.2s;
+        }
+        nav.filters button:hover, nav.filters button.active { color: #66fcf1; border-color: #66fcf1; }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .card {
+            background: #1f2833;
+            border-radius: 8px;
+            overflow: hidden;
             border: 1px solid #1f2833;
             transition: transform 0.2s, border-color 0.2s;
+            display: flex; flex-direction: column;
         }
         .card:hover { transform: translateY(-4px); border-color: #66fcf1; }
-        
-        /* Image / Looping Gameplay GIF Box */
-        .card-visual { width: 100%; height: 180px; background: #0b0c10; overflow: hidden; }
-        .card-visual img { width: 100%; height: 100%; object-fit: cover; opacity: 0.9; }
-
-        /* Review Content */
-        .card-content { padding: 1.5rem; }
-        .card-content h2 { font-size: 1.3rem; color: #ffffff; margin-bottom: 0.5rem; }
-        
-        /* Aesthetic Hashtags */
+        .card-content { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; }
+        .card-content h2 { font-size: 1.3rem; color: #ffffff; margin-bottom: 0.35rem; }
+        .vibe-line { font-style: italic; color: #9fa6ad; font-size: 0.9rem; margin-bottom: 0.9rem; }
         .vibe-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
         .tag { font-size: 0.75rem; background: #0b0c10; color: #66fcf1; padding: 0.2rem 0.6rem; border-radius: 4px; text-transform: lowercase; }
-
-        .critique { font-size: 0.9rem; color: #c5c6c7; }
-
-        /* Footer */
+        .meta { font-size: 0.8rem; color: #9fa6ad; margin-bottom: 1.1rem; }
+        .meta .paid { color: #f1c40f; }
+        .actions { margin-top: auto; display: flex; gap: 0.6rem; }
+        .play-btn {
+            background: #66fcf1; color: #0b0c10; font-weight: 600;
+            padding: 0.45rem 1.4rem; border-radius: 6px; text-decoration: none; font-size: 0.9rem;
+        }
+        .ext-btn {
+            border: 1px solid #66fcf1; color: #66fcf1;
+            padding: 0.45rem 1rem; border-radius: 6px; text-decoration: none; font-size: 0.9rem;
+        }
+        .empty {
+            grid-column: 1 / -1; text-align: center; padding: 4rem 1rem;
+            border: 1px dashed #1f2833; border-radius: 8px; color: #9fa6ad;
+        }
+        .empty h2 { color: #ffffff; margin-bottom: 0.5rem; font-size: 1.2rem; }
+        .empty a { color: #66fcf1; }
         footer { text-align: center; margin-top: 5rem; padding-top: 2rem; border-top: 1px solid #1f2833; font-size: 0.8rem; color: #45faf4; opacity: 0.5; }
+        footer a { color: inherit; }
     </style>
 </head>
 <body>
-
     <div class="container">
         <header>
             <div class="brand">
                 <h1>🌌 Vibe Vault</h1>
-                <p>An archive for atmospheric and micro-indie experiences.</p>
+                <p>Made a game with Claude? It lives here.</p>
             </div>
-            <nav>
-                <a href="#" class="active">All</a>
-                <a href="#">#Liminal</a>
-                <a href="#">#Neon-Noir</a>
-                <a href="#">#Ambient</a>
-            </nav>
+            <a class="submit-btn" href="https://github.com/Vibe-Vault/Vibe-Vault/issues/new/choose">+ Submit your game</a>
         </header>
 
-        <main class="grid">
+        <p class="intro">
+            A community home for <strong>vibe-coded games</strong> — built by describing what you want
+            and shaping it with an AI, prompt by prompt. Every game plays <strong>right in your browser</strong>:
+            no installs, no accounts, no tracking. From one-prompt jam toys to games iterated on for months —
+            both belong here.
+        </p>
 
-            <article class="card">
-                <div class="card-visual">
-                    <img src="assets/images/placeholder.jpg" alt="Game Title">
-                </div>
-                <div class="card-content">
-                    <h2>Sample Game Title</h2>
-                    <div class="vibe-tags">
-                        <span class="tag">#liminal</span>
-                        <span class="tag">#dreampunk</span>
-                        <span class="tag">#vignette</span>
-                    </div>
-                    <p class="critique">
-                        This is your core structural component for reviews. Write a tight, impactful 150-word focus detailing how the game behaves spatially, its architectural mood, and how its soundscape defines the physical environment.
-                    </p>
-                </div>
-            </article>
+        <nav class="filters" id="filters"></nav>
 
-            <article class="card">
-                <div class="card-visual">
-                    <img src="assets/images/placeholder.jpg" alt="Game Title">
-                </div>
-                <div class="card-content">
-                    <h2>Another Indie Gem</h2>
-                    <div class="vibe-tags">
-                        <span class="tag">#neon-noir</span>
-                        <span class="tag">#ambient</span>
-                    </div>
-                    <p class="critique">
-                        Duplicate this entire block whenever you want to introduce a fresh micro-experience to the front-facing grid. It automatically aligns and remains fully mobile-responsive.
-                    </p>
-                </div>
-            </article>
-
-        </main>
+        <main class="grid" id="grid"></main>
 
         <footer>
-            <p>&copy; 2026 Vibe Vault &bull; Open Source Under MIT License</p>
+            <p>&copy; 2026 Vibe Vault &bull; Open source under <a href="https://github.com/Vibe-Vault/Vibe-Vault/blob/main/LICENSE">MIT</a>
+               &bull; <a href="https://github.com/Vibe-Vault/Vibe-Vault">GitHub</a></p>
         </footer>
     </div>
 
+    <script>
+    (async function () {
+        const grid = document.getElementById("grid");
+        const filtersNav = document.getElementById("filters");
+        let games = [];
+        try {
+            games = await (await fetch("games.json")).json();
+        } catch (e) { /* fall through to empty state */ }
+
+        function render(filter) {
+            grid.innerHTML = "";
+            const shown = filter ? games.filter(g => (g.tags || []).includes(filter)) : games;
+            if (!shown.length) {
+                grid.innerHTML = `<div class="empty">
+                    <h2>The vault is opening…</h2>
+                    <p>The first games are checking in. Built one with Claude (or another AI)?<br>
+                    <a href="https://github.com/Vibe-Vault/Vibe-Vault/issues/new/choose">Be among the first on the shelf.</a></p>
+                </div>`;
+                return;
+            }
+            for (const g of shown) {
+                const card = document.createElement("article");
+                card.className = "card";
+                const tags = (g.tags || []).map(t => `<span class="tag">#${t}</span>`).join("");
+                const built = g.built_with ? `built with ${g.built_with}` : "";
+                const paid = g.full_version_url ? ` &bull; <span class="paid">demo — full version available</span>` : "";
+                const ext = g.full_version_url ? `<a class="ext-btn" href="${g.full_version_url}">Full version ↗</a>` : "";
+                card.innerHTML = `
+                    <div class="card-content">
+                        <h2>${g.title}</h2>
+                        <p class="vibe-line">${g.vibe || ""}</p>
+                        <div class="vibe-tags">${tags}</div>
+                        <p class="meta">${built}${paid}</p>
+                        <div class="actions">
+                            <a class="play-btn" href="games/${g.id}/">▶ Play</a>
+                            ${ext}
+                        </div>
+                    </div>`;
+                grid.appendChild(card);
+            }
+        }
+
+        const allTags = [...new Set(games.flatMap(g => g.tags || []))];
+        if (allTags.length) {
+            const mkBtn = (label, tag) => {
+                const b = document.createElement("button");
+                b.textContent = label;
+                b.onclick = () => {
+                    filtersNav.querySelectorAll("button").forEach(x => x.classList.remove("active"));
+                    b.classList.add("active");
+                    render(tag);
+                };
+                return b;
+            };
+            const all = mkBtn("All", null); all.classList.add("active");
+            filtersNav.appendChild(all);
+            for (const t of allTags) filtersNav.appendChild(mkBtn("#" + t, t));
+        }
+        render(null);
+    })();
+    </script>
 </body>
 </html>
