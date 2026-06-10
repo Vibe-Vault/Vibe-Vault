@@ -14,5 +14,13 @@
     "tags": ["liminal", "ambient", "night"],
     "built_with": "Claude (Fable 5)",
     "discuss_url": "https://github.com/Vibe-Vault/Vibe-Vault/discussions/3"
+  },
+  {
+    "id": "tic-tac-toe",
+    "title": "Tic Tac Toe",
+    "vibe": "well, it is exactly what you expect",
+    "tags": ["classic", "casual"],
+    "built_with": "Claude (Sonnet) — by DonatOtvosDev",
+    "discuss_url": "https://github.com/Vibe-Vault/Vibe-Vault/discussions/6"
   }
 ]
